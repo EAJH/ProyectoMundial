@@ -2,6 +2,7 @@ package com.example.proyectomundial.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,13 +34,21 @@ import com.example.proyectomundial.ui.theme.negro
 @Composable
 fun TeamItem(
     team: Team,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onTeamClick: (Team) -> Unit
 ){
+    // Necesito que el país sea clickable.
     Box(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
             .background(greenBackgroud)
+            .clickable(
+                onClick = {
+                    // Este clic sería para cada equipo
+                    onTeamClick(team)
+                }
+            )
     ) {
         Row(
             modifier = modifier
@@ -102,6 +111,8 @@ fun TeamItemPreview(){
                 nombre = "México",
                 bandera = R.drawable.bandera_prueba
             )
-        )
+        ){
+
+        }
     }
 }
