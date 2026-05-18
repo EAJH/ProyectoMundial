@@ -27,6 +27,7 @@ import com.example.proyectomundial.R
 import com.example.proyectomundial.model.Team
 import com.example.proyectomundial.ui.theme.ProyectoMundialTheme
 import com.example.proyectomundial.ui.theme.greenBackgroud
+import com.example.proyectomundial.ui.theme.negro
 
 
 @Composable
@@ -37,13 +38,13 @@ fun TeamItem(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(greenBackgroud)
             .clip(RoundedCornerShape(16.dp))
+            .background(greenBackgroud)
     ) {
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .heightIn(min = 130.dp)
+                .heightIn(min = 100.dp)
                 .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -74,6 +75,7 @@ fun TeamItem(
                     modifier = modifier
                         .fillMaxWidth(),
                     text = team.nombre,
+                    color = negro,
                     fontFamily = FontFamily(Font(R.font.noto_sans)),
                     fontWeight = FontWeight.Bold,
                     fontSize = 25.sp
