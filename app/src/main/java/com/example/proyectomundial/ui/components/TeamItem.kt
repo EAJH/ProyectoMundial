@@ -15,11 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.proyectomundial.R
 import com.example.proyectomundial.model.Team
 import com.example.proyectomundial.ui.theme.ProyectoMundialTheme
@@ -54,7 +57,10 @@ fun TeamItem(
             ) {
                 Image(
                     painter = painterResource(team.bandera),
-                    contentDescription = "Bandera del equipo"
+                    contentDescription = "Bandera del equipo",
+                    modifier = modifier
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.Fit
                 )
             }
 
@@ -65,11 +71,15 @@ fun TeamItem(
                     .padding(start = 25.dp)
             ) {
                 Text(
+                    modifier = modifier
+                        .fillMaxWidth(),
                     text = team.nombre,
-                    fontWeight = FontWeight.Bold
+                    fontFamily = FontFamily(Font(R.font.noto_sans)),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp
                 )
             }
-    }
+        }
 
     }
 }
