@@ -6,16 +6,30 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.proyectomundial.model.Group
 import com.example.proyectomundial.model.Team
 import com.example.proyectomundial.ui.screens.MainScreen
 import com.example.proyectomundial.ui.theme.ProyectoMundialTheme
+import com.example.proyectomundial.ui.theme.negro
+import com.example.proyectomundial.ui.theme.verdeBandera
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import com.example.proyectomundial.ui.theme.blanco
 
+@OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +55,41 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             ProyectoMundialTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    topBar = {
+                        // Usamos la barra alineada al centro
+                        CenterAlignedTopAppBar(
+                            title = {
+                                Text(
+                                    text = "Grupos del Mundial",
+                                    fontWeight = FontWeight.Bold
+                                )
+                            },
+                            // Agregamos el parámetro navigationIcon para el botón de vuelta
+                            navigationIcon = {
+                                IconButton(onClick = {
+                                    // !!!!!!!!!!!!!!!! NavController.popBackStack() !!!!!!!!!!!!!!
+
+
+                                }) {
+                                    Icon(
+                                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                        contentDescription = "Botón para regresar"
+                                    )
+                                }
+                            },
+                            colors = TopAppBarDefaults.topAppBarColors(
+                                containerColor = verdeBandera,
+                                titleContentColor = blanco,
+                                navigationIconContentColor = blanco
+                            )
+                        )
+                    }
+                ) { innerPadding ->
                     MainScreen(
-                        // Le paso los paddings del Scaffold a mi MainScreen a través del modifier
-                        groups,
-                        modifier = Modifier
-                            .padding(innerPadding)
+                        groups = groups,
+                        modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
