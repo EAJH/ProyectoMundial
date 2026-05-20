@@ -11,7 +11,7 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 // -------- Composable TeamItem ---------
-val greenBackgroud = Color(0xFFBAE0A2)
+val greenBackground = Color(0xFFBAE0A2)
 
 // ------ Composable GroupItem ------
 val verdeBandera = Color(0xFF319330)
@@ -19,3 +19,4 @@ val grisClaro = Color(0xFFE0DADA)
 val blanco = Color(0xFFFFFFFF)
 val grisOscuro = Color(0xFF625F5F)
 val negro = Color(0xFF000000)
+val rojoOscuro = Color(0xFFAD2727)

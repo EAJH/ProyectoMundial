@@ -3,7 +3,6 @@ package com.example.proyectomundial.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import com.example.proyectomundial.R
 import com.example.proyectomundial.model.Team
 import com.example.proyectomundial.ui.theme.ProyectoMundialTheme
-import com.example.proyectomundial.ui.theme.greenBackgroud
+import com.example.proyectomundial.ui.theme.greenBackground
 import com.example.proyectomundial.ui.theme.negro
 
 
@@ -42,7 +41,7 @@ fun TeamItem(
         modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(greenBackgroud)
+            .background(greenBackground)
             .clickable(
                 onClick = {
                     // Este clic sería para cada equipo
