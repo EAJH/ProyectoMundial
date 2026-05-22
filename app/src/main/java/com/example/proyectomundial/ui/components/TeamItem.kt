@@ -20,12 +20,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.proyectomundial.R
 import com.example.proyectomundial.model.Team
-import com.example.proyectomundial.ui.theme.ProyectoMundialTheme
 import com.example.proyectomundial.ui.theme.greenBackground
 import com.example.proyectomundial.ui.theme.negro
 
@@ -34,7 +32,7 @@ import com.example.proyectomundial.ui.theme.negro
 fun TeamItem(
     team: Team,
     modifier: Modifier = Modifier,
-    onTeamClick: (Team) -> Unit
+    onTeamClick: (Int) -> Unit
 ){
     // Necesito que el país sea clickable.
     Box(
@@ -45,12 +43,13 @@ fun TeamItem(
             .clickable(
                 onClick = {
                     // Este clic sería para cada equipo
-                    onTeamClick(team)
+                    onTeamClick(team.id)
                 }
             )
     ) {
         Row(
-            modifier = modifier
+            // Modifier limpio para evitar la herencia de paddings
+            modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(min = 100.dp)
                 .padding(10.dp),
@@ -61,7 +60,7 @@ fun TeamItem(
             // La primera usa el 30% de la pantalla y la otra el 70%
             // ------ BANDERA ------
             Column(
-                modifier = modifier
+                modifier = Modifier
                     .weight(0.3f)
             ) {
                 Image(
@@ -75,7 +74,7 @@ fun TeamItem(
 
             // ------ NOMBRE PAÍS ------
             Column(
-                modifier = modifier
+                modifier = Modifier
                     .weight(0.7f)
                     .padding(start = 25.dp)
             ) {
@@ -95,23 +94,3 @@ fun TeamItem(
 }
 
 
-
-@Preview(
-    showBackground = true
-)
-@Composable
-fun TeamItemPreview(){
-    // Cargo el composable del tema para ver como este composable
-    // se comporta de acuerdo al tema de mi aplicación
-    ProyectoMundialTheme() {
-        TeamItem(
-            team = Team(
-                id = 0,
-                nombre = "México",
-                bandera = R.drawable.bandera_prueba
-            )
-        ){
-
-        }
-    }
-}

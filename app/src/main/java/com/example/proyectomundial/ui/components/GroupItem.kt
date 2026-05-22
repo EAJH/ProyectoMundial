@@ -16,13 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.proyectomundial.R
 import com.example.proyectomundial.model.Group
-import com.example.proyectomundial.model.Team
-import com.example.proyectomundial.ui.theme.ProyectoMundialTheme
 import com.example.proyectomundial.ui.theme.blanco
 import com.example.proyectomundial.ui.theme.grisClaro
 import com.example.proyectomundial.ui.theme.grisOscuro
@@ -31,6 +27,7 @@ import com.example.proyectomundial.ui.theme.verdeBandera
 @Composable
 fun GroupItem(
     group: Group,
+    onNavigateToCountry: (Int) -> Unit,
     modifier: Modifier = Modifier
 ){
     // Contexto del activity para manejo de Toasts.
@@ -47,12 +44,12 @@ fun GroupItem(
     ){
         // Column wrap para poner el color de fondo a cada GroupItem
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .background(grisClaro)
         ) {
             // ----------- Título verde con el grupo -----------
             Box(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .background(verdeBandera)
                     .padding(16.dp)
@@ -67,7 +64,7 @@ fun GroupItem(
 
             // ----------- Todo debajo del título verde -----------
             Column(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp) // Padding interno para que los elementos no estén amontonados
             ) {
@@ -79,56 +76,44 @@ fun GroupItem(
                 )
 
                 Spacer(
-                    modifier = modifier.height(8.dp)
+                    modifier = Modifier.height(8.dp)
                 )
 
                 // Iteramos sobre la lista de equipos para crear los rows dinámicamente
                 group.teams.forEach { team ->
-                    TeamItem(team = team){ selectedTeam ->
-                        // Manejo de los clics
-                        // Para rápido, vamos a mandar el clic a los logs
-                        Log.d(
-                            "APPLOGS",
-                            "Clic en el equipo de país ${team.nombre}"
-                        )
+                    TeamItem(
+                        team = team,
+                        onTeamClick = { idTeam ->
+                            // Manejo de los clics
+                            // Para rápido, vamos a mandar el clic a los logs
+                            Log.d(
+                                "APPLOGS",
+                                "Clic en el equipo de país ${team.nombre}"
+                            )
 
-                        // Toast al hacer clic
-                        // El Toast no es un Composable, viene de la herencia de XML
-                        Toast.makeText(
-                            context,
-                            "Clic en el equipo de país ${team.nombre}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                    Spacer(modifier = modifier.height(8.dp))
+                            // Toast al hacer clic
+                            // El Toast no es un Composable, viene de la herencia de XML
+                            Toast.makeText(
+                                context,
+                                "Clic en el equipo de país ${team.nombre}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+
+                            // Ejecutamos la navegación
+                            onNavigateToCountry(idTeam)
+                        }
+
+                    )
+
+                    Spacer(
+                        modifier = Modifier.height(8.dp)
+                    )
                 }
             }
         }
 
 
 
-    }
-}
-
-
-@Preview(
-    showBackground = true
-)
-@Composable
-fun GroupItemPreview(){
-    // Cargo el composable del tema para ver como este composable
-    // se comporta de acuerdo al tema de mi aplicación
-    ProyectoMundialTheme() {
-        GroupItem(
-            group = Group(
-                nombre = "A",
-                teams = listOf(
-                    Team(1,"México", R.drawable.bandera_prueba),
-                    Team(2,"Canadá", R.drawable.bandera_prueba),
-                    Team(3,"Korea", R.drawable.bandera_prueba),
-                    Team(4,"España", R.drawable.bandera_prueba)
-                )
-            )
-        )
     }
 }
