@@ -21,30 +21,30 @@ fun AppNavigation(
 
     NavHost(
         navController = navController,
-        startDestination = MainScreenDestination // Usamos el objeto directo
+        startDestination = ScreenDestination.MainScreenDestination // Usamos el objeto directo
     ) {
 
         // 1. Pantalla Principal (MainScreen)
-        composable<MainScreenDestination> {
+        composable< ScreenDestination.MainScreenDestination> {
             MainScreen(
                 viewModel = viewModel,
                 onNavigateToCountry = { idDelEquipo ->
                     // Navegamos pasando el objeto de datos, súper intuitivo
-                    navController.navigate(CountryScreenDestination(teamId = idDelEquipo))
+                    navController.navigate(ScreenDestination.CountryScreenDestination(teamId = idDelEquipo))
                 }
             )
         }
 
         // 2. Pantalla de País (CountryScreen)
-        composable<CountryScreenDestination> { backStackEntry ->
+        composable< ScreenDestination.CountryScreenDestination> { backStackEntry ->
             // Recuperamos los datos de la pantalla anterior
-            val datos = backStackEntry.toRoute<CountryScreenDestination>()
+            val datos = backStackEntry.toRoute< ScreenDestination.CountryScreenDestination>()
             CountryScreen(
                 teamId = datos.teamId, // Pasamos el teamId a la pantalla
                 viewModel = viewModel,
                 onNavigateToPlayers = { idDelEquipo ->
                     // Navegamos pasando el objeto de datos, súper intuitivo
-                    navController.navigate(PlayersScreenDestination(teamId = idDelEquipo))
+                    navController.navigate(ScreenDestination.PlayersScreenDestination(teamId = idDelEquipo))
                 },
                 onNavigateBack = {
                     navController.popBackStack()
@@ -53,9 +53,9 @@ fun AppNavigation(
         }
 
         // 3. Pantalla de jugadores (PlayersScreen)
-        composable<PlayersScreenDestination> { backStackEntry ->
+        composable< ScreenDestination.PlayersScreenDestination> { backStackEntry ->
             // Recuperamos los datos de la pantalla anterior
-            val datos = backStackEntry.toRoute<PlayersScreenDestination>()
+            val datos = backStackEntry.toRoute< ScreenDestination.PlayersScreenDestination>()
             PlayersScreen(
                 teamId = datos.teamId, // Pasamos el teamId a la pantalla
                 viewModel = viewModel,
@@ -69,16 +69,16 @@ fun AppNavigation(
 
 
 // Ruta simple: No necesita recibir datos. Es la primer pantalla que mandamos llamar
-@Serializable
-object MainScreenDestination
-
-// Ruta con parámetros: Necesitamos saber qué equipo seleccionó el usuario
-@Serializable
-data class CountryScreenDestination(
-    val teamId: Int
-)
-
-@Serializable
-data class PlayersScreenDestination(
-    val teamId: Int
-)
+//@Serializable
+//object MainScreenDestination
+//
+//// Ruta con parámetros: Necesitamos saber qué equipo seleccionó el usuario
+//@Serializable
+//data class CountryScreenDestination(
+//    val teamId: Int
+//)
+//
+//@Serializable
+//data class PlayersScreenDestination(
+//    val teamId: Int
+//)
