@@ -6,5 +6,5 @@ data class Squad(
     @SerializedName("team")
     val team: TeamSquad,
     @SerializedName("players")
-    val players: List<PlayerSquad>
+    val players: List<Player>
 )

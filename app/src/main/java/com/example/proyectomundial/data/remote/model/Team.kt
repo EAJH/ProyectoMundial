@@ -9,15 +9,15 @@ data class Team(
     @SerializedName("name")
     val nombre: String,
     @SerializedName("code")
-    val code: String,
+    val code: String?,
     @SerializedName("country")
     val country: String,
     @SerializedName("founded")
-    val founded: Int,
+    val founded: Int?,
     @SerializedName("national")
     val national: Boolean,
     @SerializedName("logo")
     val logo: String,
 
-    @field:DrawableRes val bandera: Int
+    //@field:DrawableRes val bandera: Int
 )

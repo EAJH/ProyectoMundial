@@ -8,7 +8,7 @@ data class Venue(
     @SerializedName("name")
     val name: String,
     @SerializedName("address")
-    val address: String,
+    val address: String?,
     @SerializedName("city")
     val city: String,
     @SerializedName("capacity")

@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class SquadsResponseDto(
     @SerializedName("response")
-    val response: List<ResponseSquad>
+    val response: List<Squad>
 )
