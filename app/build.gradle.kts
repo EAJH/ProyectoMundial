@@ -56,6 +56,17 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
 
+    //Retrofit y Gson
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // Adicional para el interceptor. Va a permitir meterle a los request encabezados. Lo
+    // necesito para retrofit para poder pasar API keys
+    implementation(libs.logging.interceptor)
+
+    //Coil (para imágenes)
+    implementation(libs.coil.compose)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))

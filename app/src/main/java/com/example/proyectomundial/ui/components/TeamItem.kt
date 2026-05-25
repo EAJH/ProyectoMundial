@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.proyectomundial.R
-import com.example.proyectomundial.model.Team
+import com.example.proyectomundial.data.remote.model.Team
 import com.example.proyectomundial.ui.theme.greenBackground
 import com.example.proyectomundial.ui.theme.negro
 

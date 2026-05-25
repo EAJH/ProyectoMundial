@@ -18,7 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.proyectomundial.model.Group
+import com.example.proyectomundial.data.remote.model.Group
 import com.example.proyectomundial.ui.theme.blanco
 import com.example.proyectomundial.ui.theme.grisClaro
 import com.example.proyectomundial.ui.theme.grisOscuro

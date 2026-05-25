@@ -2,8 +2,8 @@ package com.example.proyectomundial.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.proyectomundial.R
-import com.example.proyectomundial.model.Group
-import com.example.proyectomundial.model.Team
+import com.example.proyectomundial.data.remote.model.Group
+import com.example.proyectomundial.data.remote.model.Team
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
