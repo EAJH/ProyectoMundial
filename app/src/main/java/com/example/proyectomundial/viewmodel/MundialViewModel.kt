@@ -9,18 +9,19 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class MundialViewModel: ViewModel() {
-    // 1. Guardamos el estado (privado para que no se modifique desde fuera)
+    // Estado interno del ViewModel que podemos modificar
     private val _grupos = MutableStateFlow<List<Group>>(emptyList())
 
-    // 2. Variable pública que la MainScreen va a escuchar
-    val grupos: StateFlow<List<Group>> = _grupos.asStateFlow()
+    // Estado público que la MainScreen va a observar
+    val grupos: StateFlow<List<Group>> = _grupos
 
+    // Bloque init que se ejecuta automáticamente en cuanto nace el ViewModel
     init{
         // Al iniciar el ViewModel, cargamos los datos
-        cargarDatos()
+        obtenerEquipos()
     }
 
-    private fun cargarDatos(){
+    private fun obtenerEquipos(){
         _grupos.value = listOf(
 
             // Grupos de prueba
