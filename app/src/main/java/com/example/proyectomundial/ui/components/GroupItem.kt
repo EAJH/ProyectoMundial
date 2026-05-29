@@ -55,7 +55,7 @@ fun GroupItem(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "GRUPO ${group.nombre}",
+                    text = group.nombre,
                     color = blanco,
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp
