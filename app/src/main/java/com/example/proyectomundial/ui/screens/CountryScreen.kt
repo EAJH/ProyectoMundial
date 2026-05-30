@@ -19,7 +19,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import com.example.proyectomundial.data.remote.model.Team
+import com.example.proyectomundial.data.remote.model.Venue
 import com.example.proyectomundial.ui.components.CountryTopItem
+import com.example.proyectomundial.ui.components.EstadioItem
 import com.example.proyectomundial.ui.theme.blanco
 import com.example.proyectomundial.ui.theme.verdeBandera
 import com.example.proyectomundial.viewmodel.MundialViewModel
@@ -38,11 +40,17 @@ fun CountryScreen(
     // Obtenemos la lista de 48 equipos equipos
     val teams by viewModel.teams.collectAsState()
 
-    // Buscamos en la lista el equipo correcto de acuerdo al teamId
+    // Obtenemos la lista de los 48 estadios
+    val venues by viewModel.venues.collectAsState()
+
+    // Buscamos en la lista el equipo correcto de acuerdo al teamId y obtenemos
+    // el equipo y su estado
     var equipoSeleccionado: Team? = null
+    var venueSeleccionado: Venue? = null
     for (i in 0 until teams.size){
         if(teams[i].id == teamId){
             equipoSeleccionado = teams[i]
+            venueSeleccionado = venues[i]
             break
         }
     }
@@ -55,7 +63,7 @@ fun CountryScreen(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = "Grupos del Mundial",
+                        text = "Equipo",
                         fontWeight = FontWeight.Bold
                     )
                 },
@@ -85,18 +93,19 @@ fun CountryScreen(
                 .padding(innerPadding)
         ) {
             item {
-//                Text(
-//                    modifier = Modifier
-//                        .clickable(
-//                            onClick = {
-//                                onNavigateToPlayers(teamId)
-//                            }
-//                        ),
-//                    text = "Pantalla CountryScreen"
-//                )
                 if(equipoSeleccionado != null){
                     CountryTopItem(
                         team = equipoSeleccionado
+                    )
+                }
+            }
+
+            item{
+                if((equipoSeleccionado != null) && (venueSeleccionado != null)){
+                    EstadioItem(
+                        team = equipoSeleccionado,
+                        venue = venueSeleccionado,
+                        onPlayersClick = onNavigateToPlayers
                     )
                 }
 

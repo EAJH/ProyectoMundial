@@ -52,7 +52,7 @@ fun CountryTopItem(
                 text = team.nombre.uppercase(),
                 color = negro,
                 fontWeight = FontWeight.Bold,
-                fontSize = 55.sp,
+                fontSize = 35.sp,
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(start = 16.dp, bottom = 8.dp)
@@ -64,8 +64,7 @@ fun CountryTopItem(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 24.dp),
-            //.offset(y = (-20).dp), // ¡El truco! Esto "sube" la tarjeta 20dp para que muerda la imagen de arriba
+                .padding(16.dp),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
                 containerColor = blanco

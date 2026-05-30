@@ -7,6 +7,7 @@ import com.example.proyectomundial.R
 import com.example.proyectomundial.data.remote.RetrofitHelper.apiService
 import com.example.proyectomundial.data.remote.model.Group
 import com.example.proyectomundial.data.remote.model.Team
+import com.example.proyectomundial.data.remote.model.Venue
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,6 +26,9 @@ class MundialViewModel: ViewModel() {
     // ----------- COUNTRY SCREEN ---------
     private val _teams = MutableStateFlow<List<Team>>(emptyList())
     val teams: StateFlow<List<Team>> = _teams
+
+    private val _venues = MutableStateFlow<List<Venue>>(emptyList())
+    val venues: StateFlow<List<Venue>> = _venues
 
 
 
@@ -58,6 +62,20 @@ class MundialViewModel: ViewModel() {
                         logo = responseTeam.team.logo
                     )
                 }
+
+                // Obtenemos los datos que nos interesan (solamente los equipos)
+                val listaLimpiaVenues = respuestaDto.response.map { responseVenue ->
+                    Venue(
+                        id = responseVenue.venue.id,
+                        name = responseVenue.venue.name,
+                        address = responseVenue.venue.address ?: "N/A",
+                        city = responseVenue.venue.city,
+                        capacity = responseVenue.venue.capacity,
+                        surface = responseVenue.venue.surface,
+                        image = responseVenue.venue.image
+                    )
+                }
+
 
                 // La API devuelve los equipos en orden de acuerdo a los grupos, por lo que tenemos
                 // que agruparlos en grupos de cuatro para ingresarlos al modelo de Group
@@ -108,15 +126,13 @@ class MundialViewModel: ViewModel() {
                 // Pasamos la lista de Equipos finalizada
                 _teams.value = listaEquipos
 
+                // Actualizamos el estado
+                _venues.value = listaLimpiaVenues
+
             } catch (e: Exception){
                 // Si algo falla, atrapamos el error para que la app no haga un crash
                 Log.e("MundialViewModel", "Error al conectar con la API: ${e.message}")
             }
         }
     }
-
-
-
-
-
 }
