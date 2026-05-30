@@ -130,7 +130,7 @@ fun MainScreen(
             items(groups){ group ->
                 GroupItem(
                     group = group,
-                    onNavigateToCountry = onNavigateToCountry // // Pasamos la lambda que MainScreen ya había recibido
+                    onNavigateToCountry = onNavigateToCountry // Pasamos la lambda que MainScreen ya había recibido
                 )
             }
         }

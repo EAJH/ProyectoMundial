@@ -18,6 +18,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import com.example.proyectomundial.data.remote.model.Team
+import com.example.proyectomundial.ui.components.CountryTopItem
 import com.example.proyectomundial.ui.theme.blanco
 import com.example.proyectomundial.ui.theme.verdeBandera
 import com.example.proyectomundial.viewmodel.MundialViewModel
@@ -33,8 +35,17 @@ fun CountryScreen(
     modifier: Modifier = Modifier
 ){
 
-    // "Colectamos" el estado. Si la lista cambia en el ViewModel, esto redibuja la pantalla solo.
-    // val groups by viewModel.grupos.collectAsState()
+    // Obtenemos la lista de 48 equipos equipos
+    val teams by viewModel.teams.collectAsState()
+
+    // Buscamos en la lista el equipo correcto de acuerdo al teamId
+    var equipoSeleccionado: Team? = null
+    for (i in 0 until teams.size){
+        if(teams[i].id == teamId){
+            equipoSeleccionado = teams[i]
+            break
+        }
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -74,15 +85,21 @@ fun CountryScreen(
                 .padding(innerPadding)
         ) {
             item {
-                Text(
-                    modifier = Modifier
-                        .clickable(
-                            onClick = {
-                                onNavigateToPlayers(teamId)
-                            }
-                        ),
-                    text = "Pantalla CountryScreen"
-                )
+//                Text(
+//                    modifier = Modifier
+//                        .clickable(
+//                            onClick = {
+//                                onNavigateToPlayers(teamId)
+//                            }
+//                        ),
+//                    text = "Pantalla CountryScreen"
+//                )
+                if(equipoSeleccionado != null){
+                    CountryTopItem(
+                        team = equipoSeleccionado
+                    )
+                }
+
             }
         }
     }
